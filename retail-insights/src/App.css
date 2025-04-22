@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: middle;
+}
+
+#placeholder-title {
+  color: white;
+  font-size: 5rem;
+  font-family: sans-serif;
+}
