@@ -104,10 +104,10 @@ function App() {
           CLV
         </button>
         <button
-          className={activeTab === 'allData' ? 'active' : ''}
-          onClick={() => setActiveTab('allData')}
+          className={activeTab === 'HouseHold Data' ? 'active' : ''}
+          onClick={() => setActiveTab('HouseHold Data')}
         >
-          All Data
+          HouseHold Data
         </button>
       </div>
 
@@ -120,7 +120,7 @@ function App() {
             featureImportances={featureImportances}
           />
         )}
-        {activeTab === 'allData' && <CombinedDataPage />}
+        {activeTab === 'HouseHold Data' && <CombinedDataPage />}
       </div>
     </div>
   );

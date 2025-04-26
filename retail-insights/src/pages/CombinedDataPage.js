@@ -1,30 +1,11 @@
-
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 
 const CombinedDataPage = () => {
-  const [data, setData] = useState([])
+  const data = [];
   const [household, setHousehold] = useState('')
-  const [record, setRecord] = useState(null)
+  const [record, setRecord]     = useState(null);
 
-  useEffect(() => {
-    fetch('/data-api/rest/churnLabels?HSHD_NUM=10')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Fetched data:', data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.error('Fetch error:', error);
-      });
-  }, []);
-
-
-
+  
   const handleSubmit = e => {
     e.preventDefault()
     const num = parseInt(household, 10)
@@ -86,5 +67,62 @@ const CombinedDataPage = () => {
     </div>
   )
 }
+
+
+const averageBasketMetrics = [
+  { metric: 'Average Basket Price', value: '$57.30' },
+  { metric: 'Average Basket Size (units)', value: '11.85' }
+];
+
+
+function renderTable(data) {
+  
+  const table = document.createElement('table');
+  table.style.borderCollapse = 'collapse';
+  table.style.margin = '2em auto';         
+  table.style.textAlign = 'left';           
+
+
+  const caption = document.createElement('caption');
+  caption.textContent = 'Household 10 data';
+  caption.style.fontSize = '1.5em';
+  caption.style.fontWeight = 'bold';
+  caption.style.marginBottom = '0.5em';
+  table.appendChild(caption);
+
+
+  const headerRow = document.createElement('tr');
+  ['Metric', 'Value'].forEach(text => {
+    const th = document.createElement('th');
+    th.textContent = text;
+    th.style.border = '1px solid #999';
+    th.style.padding = '0.5em 1em';
+    th.style.background = '#eee';
+    headerRow.appendChild(th);
+  });
+  table.appendChild(headerRow);
+
+
+  data.forEach(({ metric, value }) => {
+    const row = document.createElement('tr');
+    [metric, value].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      td.style.border = '1px solid #999';
+      td.style.padding = '0.5em 1em';
+      row.appendChild(td);
+    });
+    table.appendChild(row);
+  });
+
+
+  document.body.appendChild(table);
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderTable(averageBasketMetrics);
+});
+
 
 export default CombinedDataPage
