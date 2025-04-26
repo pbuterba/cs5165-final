@@ -10,6 +10,7 @@ const CombinedDataPage = () => {
     fetch('/data-api/rest/combinedData?HSHD_NUM=10').then((response) => {
       const data = response.json();
       console.log(data);
+      setData(data);
     });
   }, []);
 
