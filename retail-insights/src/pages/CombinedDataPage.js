@@ -2,19 +2,29 @@
 import React, { useState, useEffect } from 'react'
 
 const CombinedDataPage = () => {
-  const [data, setData]         = useState([])
+  const [data, setData] = useState([])
   const [household, setHousehold] = useState('')
-  const [record, setRecord]     = useState(null)
+  const [record, setRecord] = useState(null)
 
   useEffect(() => {
-    fetch('/data-api/rest/combinedData?HSHD_NUM=10').then((response) => {
-      const data = response.json();
-      console.log(data);
-      setData(data);
-    });
+    fetch('/data-api/rest/churnLabels?HSHD_NUM=10')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Fetched data:', data);
+        setData(data);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error);
+      });
   }, []);
 
-  
+
+
   const handleSubmit = e => {
     e.preventDefault()
     const num = parseInt(household, 10)
