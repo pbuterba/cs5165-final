@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
 const CombinedDataPage = () => {
   const [data, setData]         = useState([])
@@ -8,13 +7,11 @@ const CombinedDataPage = () => {
   const [record, setRecord]     = useState(null)
 
   useEffect(() => {
-    axios.get('/data/combined_data.json')
-      .then(res => setData(res.data))
-      .catch(err => {
-        console.error(err)
-        setData([])
-      })
-  }, [])
+    fetch('/data-api/rest/combinedData?HSHD_NUM=10').then((response) => {
+      const data = response.json();
+      console.log(data);
+    });
+  }, []);
 
   
   const handleSubmit = e => {
