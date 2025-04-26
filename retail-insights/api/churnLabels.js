@@ -12,7 +12,7 @@ const dbConfig = {
     }
 };
 
-const combinedData = async (context, req) => {
+const churnLabels = async (context, req) => {
     const hshdNum = req.query.HSHD_NUM || req.body.HSHD_NUM;
 
     if (!hshdNum) {
@@ -27,7 +27,7 @@ const combinedData = async (context, req) => {
         const pool = await sql.connect(dbConfig);
         const result = await pool.request()
             .input('HSHD_NUM', sql.Int, hshdNum)
-            .query('SELECT * FROM dbo.combined_data WHERE HSHD_NUM = @HSHD_NUM');
+            .query('SELECT * FROM dbo.churn_labels WHERE HSHD_NUM = @HSHD_NUM');
 
         // Check if the result is empty
         if (result.recordset.length === 0) {
@@ -55,4 +55,4 @@ const combinedData = async (context, req) => {
     }
 };
 
-export default combinedData;
+export default churnLabels;

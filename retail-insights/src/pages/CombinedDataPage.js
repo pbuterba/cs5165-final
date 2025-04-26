@@ -25,7 +25,7 @@ const CombinedDataPage = () => {
   const handleSubmit = e => {
     e.preventDefault()
     const num = parseInt(household, 10)
-    const found = data.find(item => item.HSHD_NUM === num)
+    const found = data.filter(item => item.HSHD_NUM === num)
     setRecord(found || { notFound: true })
   }
 
