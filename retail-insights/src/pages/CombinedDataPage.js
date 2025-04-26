@@ -7,10 +7,17 @@ const CombinedDataPage = () => {
   const [record, setRecord]     = useState(null)
 
   useEffect(() => {
-    fetch('/data-api/rest/combinedData?HSHD_NUM=10').then((response) => {
-      const data = response.json();
-      console.log(data);
-      setData(data);
+    // fetch('/data-api/rest/combinedData?HSHD_NUM=10').then((response) => {
+    //   response.json().then((data) => {
+    //     console.log(data);
+    //     setData(data);
+    //   });
+    // });
+    fetch('/data-api/rest/churnLabels?HSHD_NUM=10').then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+        setData(data);
+      });
     });
   }, []);
 

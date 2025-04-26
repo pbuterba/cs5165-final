@@ -29,6 +29,23 @@
     }
   },
   "entries": [
+  {
+      "name": "churnLabels",
+      "path": "/api/churnLabels",
+      "method": "GET",
+      "handler": "churnLabels",
+      "database": "SQLConnection",
+      "query": {
+        "select": "SELECT * FROM dbo.churn_labels WHERE HSHD_NUM = @HSHD_NUM",
+        "parameters": [
+          {
+            "name": "HSHD_NUM",
+            "type": "int",
+            "required": true
+          }
+        ]
+      }
+    },
     {
       "name": "combinedData",
       "path": "/api/combinedData",
